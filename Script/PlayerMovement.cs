@@ -8,27 +8,38 @@ public class PlayerMovement : MonoBehaviour {
     public float forwardForce = 1000.0f;
     public float sidewaysForce = 50.0f;
 
-	// Update is called once per frame
-	void FixedUpdate () {
+    private void Start()
+    {
+        GameController.BallForceA += ForceA;
+        GameController.BallForceD += ForceD;
+        GameController.EndGame += EndGame;
+    }
+
+
+    // Update is called once per frame
+    private void FixedUpdate () {
+
         rb.AddForce(forwardForce * Time.deltaTime, 0, 0);
 
-        if (Input.GetKey("d"))
+        if (rb.position.y < -1f || forwardForce <= 0)
         {
-            rb.AddForce(0, 0, -sidewaysForce * Time.deltaTime, ForceMode.VelocityChange);
+            GameController.End();
         }
-        if (Input.GetKey("a"))
-        {
-            rb.AddForce(0, 0, sidewaysForce * Time.deltaTime, ForceMode.VelocityChange);
-        }
-        if (rb.position.y < -1f)
-        {
-            gameObject.GetComponent<PlayerMovement>().enabled = false;
-            FindObjectOfType<GameManager>().EndGame();
-        }
-        if (forwardForce <= 0)
-        {
-            gameObject.GetComponent<PlayerMovement>().enabled = false;
-            FindObjectOfType<GameManager>().EndGame();
-        }
+    }
+
+    private void ForceA ()
+    {
+        rb.AddForce(0, 0, sidewaysForce * Time.deltaTime, ForceMode.VelocityChange);
+    }
+
+    private void ForceD ()
+    {
+        rb.AddForce(0, 0, -sidewaysForce * Time.deltaTime, ForceMode.VelocityChange);
+    }
+
+    private void EndGame ()
+    {
+        gameObject.GetComponent<PlayerMovement>().enabled = false;
+        FindObjectOfType<GameManager>().EndGame();
     }
 }

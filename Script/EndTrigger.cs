@@ -4,9 +4,21 @@ using UnityEngine;
 
 public class EndTrigger : MonoBehaviour {
 
-    private void OnTriggerEnter(Collider other)
+    private void Start()
     {
-        FindObjectOfType<GameManager>().CompleteLevel();       
+        GameController.CompleteLevel += LevelComplete;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.name == "Player")
+        {
+            GameController.Complete();
+        }
+    }
+
+    private void LevelComplete ()
+    {
+        FindObjectOfType<GameManager>().CompleteLevel();
+    }
 }

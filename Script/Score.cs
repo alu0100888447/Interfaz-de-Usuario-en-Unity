@@ -12,19 +12,13 @@ public class Score : MonoBehaviour {
     private void Start()
     {
         offset = player.position.x;
+        GameController.ScoreUI += ShowScore;
     }
 
-    // Update is called once per frame
-    void Update () {
-        float aux = player.position.x - offset;
-        if (!FindObjectOfType<GameManager>().gameHasEnd)
-        {
-        scoreText.text = aux.ToString("0");
-        }
-	}
-
-    public void EndGame ()
+    private void ShowScore ()
     {
-        
+        float aux = player.position.x - offset;
+        scoreText.text = aux.ToString("0");
     }
+
 }

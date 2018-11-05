@@ -11,7 +11,7 @@ public class ChangeScale : MonoBehaviour {
         GameController.ChangeScale += increaseScale;
     }
 
-    public void increaseScale () {
+    private void increaseScale () {
 		gameObject.GetComponent<Transform> ().localScale *= increase;
 	}
 }

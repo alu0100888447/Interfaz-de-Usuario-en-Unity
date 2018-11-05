@@ -22,7 +22,7 @@ public class ChangeBloque : MonoBehaviour {
         } 
     }
 
-    public void ChangeBlockColor ()
+    private void ChangeBlockColor ()
     {
         if (contador % 2 == 0)
         {

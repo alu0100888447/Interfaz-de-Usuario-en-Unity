@@ -22,7 +22,6 @@ public class GameManager : MonoBehaviour {
         if (gameHasEnd == false)
         {
             CompleteLevelUI.SetActive(true);
-            //textOver.text = "Complete Level";
             gameHasEnd = true;
             Invoke("EndScene", delay);
         }

@@ -6,9 +6,14 @@ public class FollowPlayer : MonoBehaviour {
 
     public Transform player;
     public Vector3 offset;
-	
-	// Update is called once per frame
-	void Update () {
+
+    private void Start()
+    {
+        GameController.FollowP += Follow;
+    }
+
+    private void Follow ()
+    {
         transform.position = player.position + offset;
-	}
+    }
 }
